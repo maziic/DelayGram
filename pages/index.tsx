@@ -2,9 +2,6 @@ import Head from "next/head";
 import { useState, useEffect } from "react";
 import styles from "../styles/Home.module.scss";
 import { Data } from "../posts/data";
-import Image from "next/image";
-import home from "../public/home.svg";
-import heart from "../public/heart.svg";
 import HeaderComponent from "@/components/headerComponent";
 
 interface Post {
@@ -16,6 +13,16 @@ interface Post {
 
 interface HomeProps {
   posts: Post[];
+}
+function getRandomNumber(): number {
+  return Math.floor(Math.random() * 100) + 1;
+}
+function formatPostTitle(title: string) {
+  const regex = /#[^\s]+/g; // regex to match hashtags without spaces
+  return title.replace(
+    regex,
+    (match) => `<span class="${styles.hashtag}">${match}</span>`
+  );
 }
 
 export default function Home({ posts }: HomeProps) {
@@ -62,23 +69,41 @@ export default function Home({ posts }: HomeProps) {
             {posts &&
               posts.map((post) => (
                 <div className={styles.post} key={post.id}>
+                  <button className="text-teal-500  flex justify-between items-center py-2 px-3 text-3xl">
+                    ☹{" "}
+                    <div className="flex underline decoration-1 pl-3 text-lg text-blue-300">
+                      sad.user
+                    </div>
+                  </button>
                   <img src={post.image} alt={post.title} />
                   <div className={styles["post__content"]}>
-                    <h2>{post.title}</h2>
-                    <div className={styles["post__actions"]}>
-                      <button
-                        className={
-                          favorites.find((p) => p.id === post.id)
-                            ? styles.active
-                            : ""
-                        }
-                        type="button"
-                        onClick={() => handleFavoriteClick(post)}
-                      >
-                        {favorites.find((p) => p.id === post.id) ? "❤️" : "🤍"}
-                      </button>
-                    </div>
+                    <button
+                      className={
+                        favorites.find((p) => p.id === post.id)
+                          ? styles.active
+                          : ""
+                      }
+                      type="button"
+                      onClick={() => handleFavoriteClick(post)}
+                    >
+                      {favorites.find((p) => p.id === post.id)
+                        ? "❤️ 20"
+                        : "🤍19 "}
+                    </button>
+                    <h2
+                      className="pt-2"
+                      dangerouslySetInnerHTML={{
+                        __html: formatPostTitle(post.title),
+                      }}
+                    />
+                    <div className={styles["post__actions"]}></div>
                   </div>
+                  <a
+                    href=""
+                    className="ml-6 mb-2 font-thin text-xs line-clamp-3 text-slate-400	"
+                  >
+                    View Comments
+                  </a>
                 </div>
               ))}
           </section>

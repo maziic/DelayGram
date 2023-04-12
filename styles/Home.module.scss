@@ -149,12 +149,23 @@ main {
               color: $primary;
             }
           }
+          .comments {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 0.8rem;
+            font-weight: 100;
+            color: rgba(255, 255, 255, 0.647);
+          }
         }
       }
     }
   }
 }
 
+.hashtag {
+  color: blue;
+  font-weight: bold;
+}
 // Define styles for the footer
 footer {
   .footer-container {

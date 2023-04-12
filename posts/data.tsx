@@ -35,7 +35,7 @@ export const Data = [
     userId: 1,
     id: 5,
     title:
-      "Took this shot just after the fireworks had finished over Tokyo Bay",
+      "Took this shot just after the fireworks had finished over Tokyo Bay #life",
     image:
       "https://images.unsplash.com/photo-1534076355207-1717511180ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     body: "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque",
