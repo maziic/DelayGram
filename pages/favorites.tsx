@@ -1,11 +1,8 @@
+import { Data } from "../posts/data";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import styles from "../styles/Home.module.scss";
-import { Data } from "../posts/data";
-import Image from "next/image";
-import home from "../public/home.svg";
-import heart from "../public/heart.svg";
-import HeaderComponent from "@/components/headerComponent";
+import HeaderComponent from "../components/headerComponent";
 
 interface Post {
   id: number;
@@ -14,24 +11,14 @@ interface Post {
   body: string;
 }
 
-interface HomeProps {
-  posts: Post[];
-}
-
-export default function Home({ posts }: HomeProps) {
+export default function Favorites() {
   const [favorites, setFavorites] = useState<Post[]>([]);
 
   const handleFavoriteClick = (post: Post) => {
-    const index = favorites.findIndex((p) => p.id === post.id);
-    if (index !== -1) {
-      setFavorites((prevFavorites) =>
-        prevFavorites.filter((p) => p.id !== post.id)
-      );
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-    } else {
-      setFavorites((prevFavorites) => [...prevFavorites, post]);
-      localStorage.setItem("favorites", JSON.stringify([...favorites, post]));
-    }
+    setFavorites((prevFavorites) =>
+      prevFavorites.filter((p) => p.id !== post.id)
+    );
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
   useEffect(() => {
@@ -41,8 +28,7 @@ export default function Home({ posts }: HomeProps) {
       setFavorites(parsedFavorites);
     }
   }, []);
-  // console.log("favorites:", favorites);
-
+  console.log("favorites from favorites:", favorites);
   return (
     <>
       <Head>
@@ -52,35 +38,30 @@ export default function Home({ posts }: HomeProps) {
           content="Home - Favorites"
         />
       </Head>
-      <HeaderComponent activePage="Home" />
-      <div className="sm:hidden">
-        <h1 className={styles["noContent"]}>Welcome to DelayGram </h1>
-      </div>
+      <HeaderComponent activePage="Favorites" />
       <main className="mt-4">
         <div className={styles["content-container"]}>
           <section>
-            {posts &&
-              posts.map((post) => (
+            {favorites.length > 0 ? (
+              favorites.map((post) => (
                 <div className={styles.post} key={post.id}>
                   <img src={post.image} alt={post.title} />
                   <div className={styles["post__content"]}>
                     <h2>{post.title}</h2>
                     <div className={styles["post__actions"]}>
                       <button
-                        className={
-                          favorites.find((p) => p.id === post.id)
-                            ? styles.active
-                            : ""
-                        }
                         type="button"
                         onClick={() => handleFavoriteClick(post)}
                       >
-                        {favorites.find((p) => p.id === post.id) ? "❤️" : "🤍"}
+                        ❤️
                       </button>
                     </div>
                   </div>
                 </div>
-              ))}
+              ))
+            ) : (
+              <div className={styles["noContent"]}>No favorites yet!</div>
+            )}
           </section>
         </div>
       </main>
@@ -93,6 +74,15 @@ export default function Home({ posts }: HomeProps) {
   );
 }
 
+// export async function getStaticProps() {
+//   const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
+//   const posts = await Data;
+//   const likedPosts = posts.filter((post: Post) =>
+//     favorites.some((fav: Post) => fav.id === post.id)
+//   );
+//   return { props: { favorites: likedPosts } };
+
+// }
 export async function getStaticProps() {
   // Fetch posts data from mocked API
   // const res = await fetch("https://jsonplaceholder.typicode.com/posts");

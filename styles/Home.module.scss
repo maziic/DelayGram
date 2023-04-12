@@ -1,0 +1,171 @@
+@import "globals"; // import global variables
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+// Define styles for the header
+header {
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: $black;
+    box-shadow: 0 1px 3px rgba($black, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+
+    ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+
+      li {
+        margin-right: 20px;
+        font-weight: 500;
+        font-size: 1.2rem;
+        cursor: pointer;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &.active {
+          color: $primary;
+        }
+      }
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-family: "Bebas Neue", cursive;
+      font-weight: bold;
+      color: rgb(255, 255, 255);
+      cursor: none;
+      font-size: 3em;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: linear-gradient(gold, gold);
+      background-size: 100% 10px;
+      background-repeat: no-repeat;
+      background-position: 100% 0%;
+      transition: background-size 0.7s, background-position 0.5s ease-in-out;
+    }
+
+    .logo:hover {
+      background-size: 100% 100%;
+      background-position: 0% 100%;
+      transition: background-position 0.7s, background-size 0.5s ease-in-out;
+    }
+  }
+
+  .mobile-nav {
+    background: $black;
+    position: fixed;
+    bottom: 0;
+    height: 65px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .bloc-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .bloc-icon img {
+    width: 30px;
+  }
+}
+.highlight {
+  color: gold;
+}
+.noContent {
+  font-size: 1.5rem;
+  font-family: "Bebas Neue", cursive;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  cursor: none;
+  font-size: 3em;
+  text-align: center;
+}
+
+// Define styles for the main content
+main {
+  .content-container {
+    background-color: $backGround;
+    padding: 80px 0;
+
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      justify-content: center;
+      padding: 0 10px;
+      grid-gap: 40px;
+
+      // Define styles for each post
+      .post {
+        background-color: $black;
+        box-shadow: 0 1px 3px rgba($black, 0.1);
+        border-radius: 5px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+        }
+
+        .post__content {
+          padding: 20px;
+
+          h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: $white;
+          }
+
+          .post__actions {
+            display: flex;
+            align-items: center;
+
+            button {
+              margin-right: 10px;
+              font-size: 1.2rem;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+              color: $gray;
+            }
+
+            .active {
+              color: $primary;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Define styles for the footer
+footer {
+  .footer-container {
+    padding: 20px;
+    background-color: $black;
+    text-align: center;
+
+    p {
+      margin: 0;
+      color: $gray;
+      font-size: 1.2rem;
+    }
+  }
+}
