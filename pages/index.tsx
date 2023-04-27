@@ -40,6 +40,9 @@ export default function Home({ posts }: HomeProps) {
       localStorage.setItem("favorites", JSON.stringify([...favorites, post]));
     }
   };
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   useEffect(() => {
     const storedFavorites = localStorage.getItem("favorites");
@@ -86,9 +89,7 @@ export default function Home({ posts }: HomeProps) {
                       type="button"
                       onClick={() => handleFavoriteClick(post)}
                     >
-                      {favorites.find((p) => p.id === post.id)
-                        ? "❤️ 20"
-                        : "🤍19 "}
+                      {favorites.find((p) => p.id === post.id) ? "❤️" : "🤍"}
                     </button>
                     <h2
                       className="pt-2"
